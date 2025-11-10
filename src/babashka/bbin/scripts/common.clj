@@ -4,7 +4,6 @@
             [babashka.bbin.meta :as meta]
             [babashka.bbin.specs]
             [babashka.bbin.util :as util :refer [sh]]
-            [babashka.deps :as deps]
             [babashka.fs :as fs]
             [clojure.edn :as edn]
             [clojure.main :as main]
@@ -282,7 +281,7 @@
 (process/exec (into base-command *command-line-args*))
 "))
 
-(def ^:private git-or-local-template-str-with-bb-edn
+(def git-or-local-template-str-with-bb-edn
   (str/trim "
 #!/usr/bin/env bb
 
@@ -335,7 +334,7 @@
 (defn add-deps [{:keys [script-deps] :as params}]
   (let [lib (key (first script-deps))]
     (when-not (#{::no-lib} lib)
-      (deps/add-deps {:deps script-deps}))
+      (bbin-deps/add-deps {:deps script-deps}))
     params))
 
 (defn calc-script-root [{:keys [header script-deps] :as params}]
