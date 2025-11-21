@@ -334,7 +334,7 @@
 (defn add-deps [{:keys [script-deps] :as params}]
   (let [lib (key (first script-deps))]
     (when-not (#{::no-lib} lib)
-      (bbin-deps/add-deps {:deps script-deps}))
+      (bbin-deps/add-libs script-deps))
     params))
 
 (defn calc-script-root [{:keys [header script-deps] :as params}]
